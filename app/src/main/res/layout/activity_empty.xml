@@ -18,19 +18,35 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mRecycler"
-        android:layout_width="412dp"
-        android:layout_height="290dp"
+        android:layout_width="403dp"
+        android:layout_height="537dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout"
         tools:ignore="MissingConstraints" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addTraining"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="3dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="#5E35B1"
+        app:layout_constraintBottom_toTopOf="@+id/reminderCalorie"
+        app:layout_constraintTop_toBottomOf="@+id/mRecycler"
+        app:tint="@color/white"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="348dp" />
+
     <Button
         android:id="@+id/reminderWater"
         android:layout_width="0dp"
         android:layout_height="71dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="64dp"
         android:backgroundTint="@color/purple_200"
         android:text="@string/reminder_water"
         android:textColor="@android:color/white"
@@ -46,7 +62,7 @@
         android:id="@+id/reminderCalorie"
         android:layout_width="0dp"
         android:layout_height="71dp"
-        android:layout_marginTop="352dp"
+        android:layout_marginTop="64dp"
         android:backgroundTint="@color/purple_200"
         android:text="@string/reminder_calorie"
         android:textColor="@android:color/white"

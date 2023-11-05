@@ -1,134 +1,115 @@
 package com.malkinfo.editingrecyclerview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import com.google.gson.Gson
-import com.malkinfo.editingrecyclerview.model.ClassLink
-import com.malkinfo.editingrecyclerview.parsing.parsingurl
-import com.malkinfo.editingrecyclerview.view.UserAdapter
+import com.malkinfo.editingrecyclerview.activity.FirstActivity
+import com.malkinfo.editingrecyclerview.data.UserData
 
 
 private const val LINKS_PREFS = "links_prefs"
 private const val LINKS_KEY = "links_key"
+private const val PREFS_NAME = "MyPrefs"
+private const val IS_FIRST_RUN = "isFirstRun"
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var addsBtn:FloatingActionButton
-    private lateinit var rev:RecyclerView
-    private lateinit var userList:ArrayList<ClassLink>
-    private lateinit var userAdapter:UserAdapter
+    private lateinit var radioGroupActivityLevel: RadioGroup
+    private lateinit var etWeight: EditText
+    private lateinit var etHeight: EditText
+    private lateinit var radioMale: RadioButton
+    private lateinit var btn_save: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
+        if (prefs.getBoolean(IS_FIRST_RUN, true)) {
+            setContentView(R.layout.activity_main)
+            radioGroupActivityLevel = findViewById(R.id.radio_group_activity_level)
+            etWeight = findViewById(R.id.et_weight)
+            etHeight = findViewById(R.id.et_height)
+            radioMale = findViewById(R.id.radio_male)
+            btn_save = findViewById(R.id.btn_save)
+
+            btn_save.setOnClickListener {
+                saveUserData()
+                startActivity(Intent(this@MainActivity, FirstActivity::class.java))
+                finish()
+            }
+
+            prefs.edit().putBoolean(IS_FIRST_RUN, false).apply()
+        } else {
+            startActivity(Intent(this, FirstActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun saveUserData() {
+        val userData = UserData(
+            radioGroupActivityLevel.checkedRadioButtonId,
+            etWeight.text.toString().toDouble(),
+            etHeight.text.toString().toDouble(),
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            if (radioMale.isChecked) "male" else "female"
+        )
+        userData.calculateNorms()
+        println(userData)
+        val jsonData = Gson().toJson(userData)
+        println(jsonData)
+        val sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("data", jsonData)
+        editor.apply()
+    }
+}
+
+
+/*private lateinit var radioGroupActivityLevel: RadioGroup
+    private lateinit var etWeight: EditText
+    private lateinit var etHeight: EditText
+    private lateinit var radioMale: RadioButton
+    private lateinit var btn_save: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        radioGroupActivityLevel = findViewById(R.id.radio_group_activity_level)
+        etWeight = findViewById(R.id.et_weight)
+        etHeight = findViewById(R.id.et_height)
+        radioMale = findViewById(R.id.radio_male)
+        btn_save = findViewById(R.id.btn_save)
 
-        /**set List*/
-        userList = ArrayList()
-        /**set find Id*/
-        addsBtn = findViewById(R.id.addingBtn)
-        rev = findViewById(R.id.mRecycler)
-        /**set Adapter*/
-        userAdapter = UserAdapter(this,userList,LINKS_PREFS)
-        /**setRecycler view Adapter*/
-        rev.layoutManager = LinearLayoutManager(this)
-        rev.adapter = userAdapter
-        /**set Dialog*/
-        val linksJson = getSharedPreferences(LINKS_PREFS, MODE_PRIVATE).getString(LINKS_KEY, "")
-        if (linksJson != null) {
-            if (linksJson.isNotEmpty()) {
-                val links = Gson().fromJson(linksJson, Array<ClassLink>::class.java)
-                println("jsfail1: $links")
-                userList.addAll(links)
-                println("restart app: $userList")
-                userAdapter.notifyDataSetChanged()
-            }
+        btn_save.setOnClickListener {
+            saveUserData()
+            startActivity(Intent(this@MainActivity, EmptyActivity::class.java))
+            finish()
         }
-
-        addsBtn.setOnClickListener { addInfo() }
-
     }
 
+    private fun saveUserData() {
+        val userData = UserData(
+            radioGroupActivityLevel.checkedRadioButtonId,
+            etWeight.text.toString().toDouble(),
+            etHeight.text.toString().toDouble(),
+            0.0,
+            0.0,
+            if (radioMale.isChecked) "male" else "female"
+        )
+        userData.calculateNorms()
+        val jsonData = Gson().toJson(userData)
+        val sharedPreferences = getSharedPreferences("UserData", AppCompatActivity.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("data", jsonData)
+        editor.apply()
+    }  */
 
 
-    private fun addInfo() {
-        val parser = parsingurl()
-        val inflater = LayoutInflater.from(this)
-        val v = inflater.inflate(R.layout.add_item,null)
-        /**set view*/
-        val Links = v.findViewById<EditText>(R.id.Link)
 
-        val addDialog = AlertDialog.Builder(this)
 
-        addDialog.setView(v)
-        addDialog.setPositiveButton("Ok"){
-            dialog,_->
-            val Link = Links.text.toString()
-
-            if (Link.isNotEmpty()){
-                try {
-                    val id = userList.size + 1
-                    val linkParsing = parser.fromUrl(Link, id)
-                    userList.add(linkParsing)
-                    userAdapter.notifyDataSetChanged()
-
-                    val linksJson = Gson().toJson(userList)
-                    val editor = getSharedPreferences(LINKS_PREFS, MODE_PRIVATE).edit()
-                    editor.putString(LINKS_KEY, linksJson)
-                    editor.apply()
-
-                    Toast.makeText(this,"Adding User Information Success",Toast.LENGTH_SHORT).show()
-                    dialog.dismiss()
-                } catch (e: Exception){
-                    Toast.makeText(this,"Error occurred: ${e.message}",Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
-            }
-        }
-        addDialog.setNegativeButton("Cancel"){
-            dialog,_->
-            dialog.dismiss()
-            Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
-
-        }
-        addDialog.create()
-        addDialog.show()
-    }
-    /**ok now run this */
-
-}
-
-//@SuppressLint("NotifyDataSetChanged")
-//private fun addInfo() {
-//    val parser = parsingurl()
-//    val inflater = LayoutInflater.from(this)
-//    val v = inflater.inflate(R.layout.add_item,null)
-//    /**set view*/
-//    val addDialog = AlertDialog.Builder(this)
-//    addDialog.setView(v)
-//    addDialog.setPositiveButton("Ok"){ dialog,_ ->
-//        val enteredLink =Link.text.toString().trim()
-//        if (enteredLink.isNotEmpty()) {
-//            val id = userList.size + 1
-//            val link = parser.fromUrl(enteredLink, id)
-//            userList.add(link)
-//            userAdapter.notifyDataSetChanged()
-//            Toast.makeText(this,"Adding User Information Success",Toast.LENGTH_SHORT).show()
-//            dialog.dismiss()
-//        } else {
-//            Toast.makeText(this,"Please enter a valid link",Toast.LENGTH_SHORT).show()
-//        }
-//    }
-//    addDialog.setNegativeButton("Cancel"){ dialog, _ ->
-//        dialog.dismiss()
-//        Toast.makeText(this,"Cancel",Toast.LENGTH_SHORT).show()
-//    }
-//    addDialog.create()
-//    addDialog.show()
-//}

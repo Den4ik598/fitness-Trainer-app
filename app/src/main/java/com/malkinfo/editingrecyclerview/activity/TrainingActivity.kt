@@ -9,8 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.malkinfo.editingrecyclerview.R
 import com.malkinfo.editingrecyclerview.data.Exercise
+import java.lang.String.format
 
 class TrainingActivity : AppCompatActivity() {
 
@@ -21,18 +24,17 @@ class TrainingActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var completeButton: Button
     private lateinit var imageView: ImageView
-
+    private lateinit var exercises: List<Exercise>
     private var exerciseIndex = 0
     private lateinit var currentExercise: Exercise
     private lateinit var timer: CountDownTimer
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_training)
+
+        val exerciseListJson = intent.getStringExtra("exerciseListJson")
+        exercises = Gson().fromJson(exerciseListJson, object : TypeToken<List<Exercise>>() {}.type)
 
         titleTextView = findViewById(R.id.titleTextView)
         exerciseTextView = findViewById(R.id.exerciseTextView)
@@ -49,9 +51,6 @@ class TrainingActivity : AppCompatActivity() {
         completeButton.setOnClickListener {
             completeExercise()
         }
-
-
-
     }
 
     private fun completeExercise() {
@@ -69,11 +68,6 @@ class TrainingActivity : AppCompatActivity() {
     }
 
     private fun startNextExercise() {
-         val exercises = mutableListOf(
-            Exercise("Push-ups", "Place your hands shoulder-width apart on the floor. Lower your body until your chest nearly touches the floor. Push your body back up until your arms are fully extended.", 30,R.drawable.push_ups),
-            Exercise("Squats", "Stand with your feet shoulder-width apart. Lower your body as far as you can by pushing your hips back and bending your knees. Return to the starting position.", 45,R.drawable.squat),
-            Exercise("Plank", "Start in a push-up position, then bend your elbows and rest your weight on your forearms. Hold this position for as long as you can.", 60,R.drawable.planks)
-        )
         if (exerciseIndex < exercises.size) {
             currentExercise = exercises[exerciseIndex]
             exerciseTextView.text = currentExercise.name
@@ -86,7 +80,6 @@ class TrainingActivity : AppCompatActivity() {
             timer = object : CountDownTimer(currentExercise.durationInSeconds * 1000L, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     timerTextView.text = formatTime((millisUntilFinished / 1000).toInt())
-
                 }
 
                 override fun onFinish() {
@@ -110,6 +103,6 @@ class TrainingActivity : AppCompatActivity() {
     private fun formatTime(seconds: Int): String {
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
-        return String.format("%02d:%02d", minutes, remainingSeconds)
+        return format("%02d:%02d", minutes, remainingSeconds)
     }
 }

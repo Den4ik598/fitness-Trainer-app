@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EditingRecyclerView</string>
+    <string name="water_tracker">water Tracker</string>
+    <string name="reminder_tracker" />
+    <string name="reminder_water">reminder water</string>
+    <string name="reminder_calorie">reminder Calorie</string>
 </resources>

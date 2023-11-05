@@ -1,37 +1,121 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/mRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addingBtn"
+    <TextView
+        android:id="@+id/tv_height_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginBottom="15dp"
-        android:src="@drawable/ic_add"
-        app:backgroundTint="#5E35B1"
-        app:tint="@color/white" />
+        android:text="Рост (см)"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/tv_height_label"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/tv_weight_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Вес (кг)"
+        android:layout_below="@id/et_height"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/et_weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:layout_below="@id/tv_weight_label"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_sex_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Пол"
+        android:layout_below="@id/et_weight"
+        android:layout_marginTop="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_sex"
+        android:layout_below="@id/tv_sex_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_male"
+            android:text="Мужской"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_female"
+            android:text="Женский"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_activity_level_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Уровень физической активности"
+        android:layout_below="@id/radio_group_sex"
+        android:layout_marginTop="20dp"/>
+
+    <RadioGroup
+        android:id="@+id/radio_group_activity_level"
+        android:layout_below="@id/tv_activity_level_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/radio_level_1"
+            android:text="Не делаю физических упражнений"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_level_2"
+            android:text="Занимаюсь легкими упражнениями 1-3 раза в неделю"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_level_3"
+            android:text="Занимаюсь упражнениями средней тяжести 3-5 раз в неделю"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_level_4"
+            android:text="Занимаюсь интенсивными упражнениями 6-7 раз в неделю"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <RadioButton
+            android:id="@+id/radio_level_5"
+            android:text="Занимаюсь профессионально"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Подтвердить"
+        android:layout_below="@id/radio_group_activity_level"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/purple_200"/>
 
 </RelativeLayout>
