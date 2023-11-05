@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDDailyGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Суточная норма: 2000 кл"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/pbCaloriesProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:progress="0"
+        android:backgroundTint="@color/purple_200"/>
+
+    <TextView
+        android:id="@+id/tvDailyCalories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="сьедено за сегодня: 0 кл"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCaloriesDrinks"
+        android:layout_width="match_parent"
+        android:layout_height="585dp" />
+
+    <Button
+        android:id="@+id/btnAddDishes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Добавить еду"
+        android:backgroundTint="@color/purple_200" />
+
+</LinearLayout>

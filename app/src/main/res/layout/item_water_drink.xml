@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+app:cardCornerRadius="10dp"
+app:cardElevation="8dp"
+app:cardMaxElevation="5dp"
+android:layout_margin="10dp"
+    >
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="284dp"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/tvVolume"
+        android:layout_width="match_parent"
+        android:layout_height="33dp" />
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

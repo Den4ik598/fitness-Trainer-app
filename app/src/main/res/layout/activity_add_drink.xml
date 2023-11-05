@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Название напитка" />
+
+    <EditText
+        android:id="@+id/etVolume"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Объем напитка (мл)" />
+
+    <Button
+        android:id="@+id/btnAddDrink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Добавить"
+        android:backgroundTint="@color/purple_200"/>
+
+</LinearLayout>

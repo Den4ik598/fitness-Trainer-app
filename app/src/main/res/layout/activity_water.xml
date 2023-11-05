@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvDailyGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Суточная норма: 2000 мл"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <ProgressBar
+        android:id="@+id/pbWaterProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:progress="0"
+        android:backgroundTint="@color/purple_200"/>
+
+    <TextView
+        android:id="@+id/tvDailyWater"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выпито за сегодня: 0 мл"
+        android:textAppearance="?android:textAppearanceMedium" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWaterDrinks"
+        android:layout_width="match_parent"
+        android:layout_height="585dp" />
+
+    <Button
+        android:id="@+id/btnAddDrink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Добавить напиток"
+        android:backgroundTint="@color/purple_200" />
+
+</LinearLayout>
