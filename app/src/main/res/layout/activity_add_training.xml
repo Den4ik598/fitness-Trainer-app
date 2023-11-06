@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JsonData" />
+
+    <EditText
+        android:id="@+id/titleEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/exerciseRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/descriptionEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description" />
+
+    <EditText
+        android:id="@+id/durationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Duration (in seconds)" />
+
+    <Button
+        android:id="@+id/addExerciseButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Exercise"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/saveTrainingButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Training"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

@@ -1,6 +1,8 @@
 package com.malkinfo.editingrecyclerview.data
 
-data class WorkoutClass (
+import java.io.Serializable
+
+data class WorkoutClass(
     val title: String,
-    val exercises: List<Exercise>
-)
+    val exercises: List<Exercise> = listOf()
+) : Serializable

@@ -23,6 +23,7 @@
         <activity android:name=".activity.AddDrinkActivity"/>
         <activity android:name=".activity.WaterActivity"/>
         <activity android:name=".activity.AddDishesActivity"/>
+        <activity android:name=".activity.AddTrainingActivity"/>
 
     </application>
 

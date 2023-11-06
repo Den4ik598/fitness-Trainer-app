@@ -4,4 +4,10 @@
     <string name="reminder_tracker" />
     <string name="reminder_water">reminder water</string>
     <string name="reminder_calorie">reminder Calorie</string>
+    <string name="train_name" />
+    <string name="exercises" />
+    <string name="add_exercise" />
+    <string name="exercise_name" />
+    <string name="exercise_description" />
+    <string name="exercise_duration" />
 </resources>
