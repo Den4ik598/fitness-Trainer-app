@@ -48,22 +48,22 @@ class WaterActivity : AppCompatActivity() {
 
         drinks = mutableListOf()
 
-        // загрузка данных из SharedPreferences
+
         loadWaterDataFromSharedPreferences()
         loadWaterDrinksFromSharedPreferences()
 
-        // настройка кнопки добавления напитка
+
         btnAddDrink.setOnClickListener {
             val intent = Intent(this, AddDrinkActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_NEW_DRINK)
         }
 
-        // настройка RecyclerView
+
         val adapter = WaterDrinkAdapter(drinks)
         rvWaterDrinks.adapter = adapter
         rvWaterDrinks.layoutManager = LinearLayoutManager(this)
 
-        // обновление элементов интерфейса
+
         updateWaterProgressBar()
         updateWaterTextFields()
     }

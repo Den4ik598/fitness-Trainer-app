@@ -19,7 +19,7 @@ data class UserData(
     }
 
     public fun calculateNorms() {
-        val age = 25 // Возраст не известен, поэтому значение тут задано произвольно
+        val age = 25
         val sexMult = if (sex == "male") 1.0 else -161.0
         val kalloriCoeff = when(activityLevel) {
             R.id.radio_level_1 -> 1.2
@@ -27,7 +27,7 @@ data class UserData(
             R.id.radio_level_3 -> 1.55
             R.id.radio_level_4 -> 1.725
             R.id.radio_level_5 -> 1.9
-            else -> 1.2 // По умолчанию, в случае если activityLevel не задан
+            else -> 1.2
         }
         kalloriNorm = ((weight * 10) + (height * 6.25) - (age * 5) + sexMult) * kalloriCoeff
         waterNorm = weight * if (sex == "male") 35 else 31

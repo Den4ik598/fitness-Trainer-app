@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EditingRecyclerView</string>
+    <string name="app_name">Fitness App</string>
     <string name="water_tracker">water Tracker</string>
     <string name="reminder_tracker" />
     <string name="reminder_water">reminder water</string>

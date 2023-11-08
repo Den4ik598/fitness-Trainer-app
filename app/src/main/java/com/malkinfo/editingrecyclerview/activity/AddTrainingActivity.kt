@@ -30,15 +30,7 @@ class AddTrainingActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val json = intent.getStringExtra("workoutListJson")
-        val workoutList: List<WorkoutClass> = if (!json.isNullOrEmpty()) {
-            Gson().fromJson(json, object : TypeToken<List<WorkoutClass>>() {}.type)
-        } else {
-            // create a default list when json is null or empty
-            listOf(
-                WorkoutClass("Workout 1", listOf())
-            )
-        }
+
 
         recyclerView = findViewById(R.id.exerciseRecyclerView)
         adapter = ExerciseAdapter(exerciseList)
@@ -71,34 +63,11 @@ class AddTrainingActivity : AppCompatActivity() {
             val title = titleEditText.text.toString()
 
             val workout = WorkoutClass(title, exerciseList.toList())
-            val intent = Intent().apply {
-                putExtra("workout", workout)
-                putExtra("workoutListJson", Gson().toJson(workoutList))
-            }
+            val intent = Intent()
+            intent.putExtra("workout", workout)
+            intent.putExtra("workoutListJson", workout)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            setResult(Activity.RESULT_CANCELED)
-            finish()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    override fun onBackPressed() {
-        val titleEditText = findViewById<EditText>(R.id.titleEditText)
-        val title = titleEditText.text.toString()
-
-        val workout = WorkoutClass(title, exerciseList.toList())
-        val intent = Intent().apply {
-            putExtra("workout", workout)
-            putExtra("workoutListJson", Gson().toJson(adapter2.workoutList))
-        }
-        setResult(Activity.RESULT_OK, intent)
-        finish()
     }
 }

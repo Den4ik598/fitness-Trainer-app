@@ -93,8 +93,8 @@ class CalorieActivity : AppCompatActivity() {
     }
 
     private fun updateWaterTextFields() {
-        tvDailyGoal.text = "Суточная норма: ${waterData.kalloriNorm} мл"
-        tvDailyCalories.text = "Выпито за сегодня: ${waterData.kallorisutk} мл"
+        tvDailyGoal.text = "Суточная норма: ${waterData.kalloriNorm} кл"
+        tvDailyCalories.text = "употреблено за сегодня: ${waterData.kallorisutk} кл"
     }
 
     private fun loadWaterDataFromSharedPreferences() {
